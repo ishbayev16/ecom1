@@ -12,7 +12,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".ShowAllJSONObjectActivity">
+        <activity android:name=".DownloadImageActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,8 +21,10 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".ShowJsonObjectActivity">
+        <activity android:name=".ShowAllJSONObjectActivity">
 
+        </activity>
+        <activity android:name=".ShowJsonObjectActivity">
         </activity>
         <activity android:name=".MainActivity">
         </activity>
