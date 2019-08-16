@@ -1,34 +1,39 @@
 package com.example.ecommerceappkotlin
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
 
-    private var sharedP: SharedPreferences? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnAdd.setOnClickListener {
-            sharedP = getSharedPreferences("addData", Context.MODE_PRIVATE)
-            //editor job to write data to sharedPreferences
-            var myEditer = sharedP?.edit()
-            myEditer?.putString("product_name",edtProduct.text.toString())
-            myEditer?.commit()
+        btnGetDataFromServer.setOnClickListener {
+            val serverURL: String="http://192.168.1.21/PhpTest/test_file.php"
+
+
+            var requestQ: RequestQueue = Volley.newRequestQueue(this@MainActivity)
+
+            var stringRequest = StringRequest(Request.Method.GET, serverURL, Response.Listener { response ->
+
+                    txtHelloWorld.text = response
+
+                }, Response.ErrorListener { error->txtHelloWorld.text = error.message
+                })
+
+            requestQ.add(stringRequest)
+
 
         }
-
-        btnGetProduct.setOnClickListener {
-            //second argument is default arg
-            txtGetProduct.text = sharedP?.getString("product_name","")
-        }
-
 
 
     }
